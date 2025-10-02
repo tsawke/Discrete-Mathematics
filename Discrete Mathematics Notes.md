@@ -27,3 +27,6 @@ Discrete Mathematics $\approx$ Combinatorics
 ![image-20250915150456556](C:\Users\10126\AppData\Roaming\Typora\typora-user-images\image-20250915150456556.png)
 
 ![image-20250915150517747](C:\Users\10126\AppData\Roaming\Typora\typora-user-images\image-20250915150517747.png)
+
+## Sequences
+
