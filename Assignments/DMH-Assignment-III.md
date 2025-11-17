@@ -47,11 +47,17 @@ Sol:
 
 ![image-20251109233852230](./assets/image-20251109233852230.png)
 
-PF:  **TODO**
+PF: 
 
-Let $d = \gcd(b + a, b - a) = \gcd(b + a - (b - a), b - a - (b + a)) = \gcd(2a, 2b)$, then we have $d \mid 2a, d \mid 2b$.
+Let $d = \gcd(b + a, b - a) = \gcd(b + a, b - a + (b + a)) = \gcd(b + a, 2b)$, then we have $d \mid 2b$.
 
-For $\gcd(a, b) = 1$, 
+Let $d = \gcd(b + a, b - a) = \gcd(b + a - (b - a), b - a) = \gcd(2a, b - a)$, then we have $d \mid 2a$.
+
+For $\gcd(a, b) = 1$, $\gcd(2a, 2b) = 2\gcd(a, b) = 2$.
+
+Therefore, $d \le 2$, i.e., $\gcd(b + a, b - a) \le 2$.
+
+$\texttt{Q.E.D.}$.
 
 ## Q.4
 
@@ -81,305 +87,367 @@ Sol:
 
     Therefore, $\gcd(312, 97) = 1$.
 
-3. 
+3. Implement the back-substitute:
+
+    $1 = 3 - 2 \times 1$.
+
+    $1 = 3 - (5 - 3)$.
+
+    $1 = 2 \times (8 - 5) - 5$.
+
+    $1 = 2 \times 8 - 3 \times (13 - 8)$.
+
+    $1 = 5 \times (21 - 13) - 3 \times 13$.
+
+    $1 = 5 \times 21 - 8 \times (97 - 21 \times 4)$.
+
+    $1 = 37 \times (312 - 97 \times 3) - 8 \times 97$.
+
+    $1 = 37 \times 312 - 119 \times 97$.
+
+    Therefore, $s = 37, t = -119$.
+
+4. For $312 x \equiv 3 \pmod{97}$, and $312 \equiv 21 \pmod{97}$, we have: $21 x \equiv 3 \pmod{97}$.
+
+    For (3), we have: $1 = 37 \times 21 - 8 \times 97$, then $37 \times 21 \equiv 1 \pmod{97}$, thus the inverse of $21$ is $37$, then $x \equiv 3 \times 37 \equiv 14 \pmod{97}$.
+
+    Therefore, $x \equiv 14 \pmod{97}$.
 
 ## Q.5
 
-![image-20251027011252174](./assets/image-20251027011252174.png)
+![image-20251110035428972](./assets/image-20251110035428972.png)
 
-Sol:
+PF:
 
-1. $A = [0, 1]$, $B = [0, 1] \cup \{2\}$, then $A \oplus B = \{2\}$, which is finite.
-2. $A = [-2, -1]$, $B = [-2, -1] \cup \mathbb{N}$, then $A \oplus B = \mathbb{N}$, which is countably infinite.
-3. $A = [0, 1]$, $B = [2, 3]$, then $A \oplus B = [0, 1] \cup [2, 3]$, which is uncountable.
+We have $$\gcd(pq,qr)=q$$ and $$\gcd(q,rp)=1$$, for Bezout, we have: $s(pq)+t(qr)=q, uq+v(rp)=1$.
+
+Substitute the $q$ of the second equation via the first equation: $us(pq)+ut(qr)+v(rp)=1$.
+
+W.l.o.g., let $a = us, b = ut, c = v$, it's obvious to prove.
+
+$\texttt{Q.E.D.}$.
 
 ## Q.6
 
-![image-20251027011726325](./assets/image-20251027011726325.png)
+![image-20251110042030182](./assets/image-20251110042030182.png)
 
 PF:
-We have $\forall (a,b)\in A \times B, \ a\in A \land b\in B$.
+Let $$d=\gcd(a,m)\ne 1$$, we have $$d>1$$ and $$d\mid a$$ and $$d\mid m$$.
+Assuming $$a$$ had an inverse, i.e., $$\exists x$$ s.t. $$ax\equiv 1\pmod m$$, i.e., $$m\mid (ax-1)$$.
+For $$d\mid a$$ and $$d\mid m$$, then $$d\mid ax$$, and$$d\mid (ax-1)$$, then $d \mid (ax-1) - ax = -1$, i.e., $$d\mid 1$$, leading to a contradiction.
 
-And for $A\subseteq C, B\subseteq D$, we obtain $a\in C, b\in D$, which is $(a, b) \in C \times D$.
-
-Therefore, $A\times B\subseteq C\times D$.
+Thus, $$a$$ has no inverse mod $$m$$.
 
 $\texttt{Q.E.D.}$.
 
 ## Q.7
 
-![image-20251027012134428](./assets/image-20251027012134428.png)
+![image-20251110042816630](./assets/image-20251110042816630.png)
 
 PF:
 
-We have:
-$$
-(f\circ g)\circ(g^{-1}\circ f^{-1})
- = f\circ (g\circ g^{-1})\circ f^{-1}
- = f\circ I_Y\circ f^{-1}
- = I_Z
-$$
-and:
-$$
- (g^{-1}\circ f^{-1})\circ(f\circ g)
- = g^{-1}\circ (f^{-1}\circ f)\circ g
- = g^{-1}\circ I_Y \circ g
- = g^{-1}\circ g
- = I_X.
- 
-$$
-Thus $(f\circ g)^{-1} = g^{-1}\circ f^{-1}$.
+
+Assume that there are finitely many primes of the form $$6k+5$$, denotes as $$p_1, p_2, \cdots,p_n$$, let $$P=p_1\cdots p_n$$ and let $$N=6P-1$$.
+
+Then $$N\equiv 5\pmod 6$$ and for each $$i$$ we have $$N\equiv -1\pmod{p_i}$$, thus $$p_i\nmid N$$.
+Let $$q$$ be a prime divisor of $$N$$. Since $$q>3$$, obviously there has to be $$q\equiv 1$$ or $$q\equiv 5\pmod 6$$.
+If all prime factors s.t. $$q\equiv 1\pmod 6$$, their product would s.t. $$\prod \equiv 1\pmod 6$$, leading to a contradiction to $$N\equiv 5\pmod 6$$.
+
+Thus some factor satisfies $$q\equiv 5\pmod 6$$. Since $$q\nmid P$$, which is not in the prime list, producing a new $$6k+5$$ prime, leading to a contradiction.
+
+Thus, there are infinitely many primes of the form $$6k+5$$.
 
 $\texttt{Q.E.D.}$.
 
 ## Q.8
 
-![image-20251027021912340](./assets/image-20251027021912340.png)
+![image-20251110043559234](./assets/image-20251110043559234.png)
 
-Sol:
+PF:
 
-1. $f$ doesn't have to be one-to-one.
+Let $$d=\gcd(a,b)$$ and let $$a=d\,x$$, $$b=d\,y$$ with $$\gcd(x,y)=1$$.
+Then $$\operatorname{lcm}(a,b)=\dfrac{ab}{\gcd(a,b)}=dxy$$.
+$$
+\begin{aligned}&\gcd(a,b)+\operatorname{lcm}(a,b)=a+b\\
+ \iff &d+dxy=dx+dy\\
+ \iff &1+xy=x+y\\
+ \iff &(x-1)(y-1)=0
+ \end{aligned}
+$$
+And $$x=1$$ or $$y=1$$ is obviously represent $$a\mid b$$ or $$b\mid a$$.
 
-Let $A=\{1,2\}$, $B=\{a,b,c\}$, $C=\{0,1\}$, and $g(1)=a, g(2)=b, f(a)=0,f(b)=1,f(c)=1$, then $(f\circ g)(1)=0,(f\circ g)(2)=1$, which is an injection.
-
-2. $g$ must be one-to-one.
-
-If $\exists x_1, x_2, s.t. x_1 \neq x_2 \land g(x_1) = g(x_2)$, then $(f\circ g)(x_1)=(f\circ g)(x_2)$, leads to a contradiction. Thus $g$ is an injection.
-
-3. $g$ must be one-to-one.
-
-Reason is same as 2.
-
-4. $f$ must be onto.
-
-We have $\forall z \in C, \exists x \in A, (f\circ g)(x)=z$, let $y = g(x)$, then $f(y) = z$, i.e., $f$ is a surjection.
-
-5. $g$ doesn't have to be onto.
-
-Let $A=\{a,b\}$, $B=\{0,1,2\}$, $C=\{0,1\}$, $g(a)=0,g(b)=1, f(0)=0,f(1)=1,f(2)=1$, then $(f\circ g)(a)=0,(f\circ g)(b)=1$, which is a surjection.
+$\texttt{Q.E.D.}$.
 
 ## Q.9
 
-![image-20251027022137738](./assets/image-20251027022137738.png)
+![image-20251110044730911](./assets/image-20251110044730911.png)
 
-Sol:
-$$
-\begin{aligned}
-k^3-(k-1)^3&=3k^2-3k+1\\
-\Rightarrow\sum_{k=1}^n\big(k^3-(k-1)^3\big) &= \sum_{k=1}^n(3k^2-3k+1) \\
-\Rightarrow n^3 &= 3\sum_{k=1}^n k^2-3\sum_{k=1}^n k+n \\
-\Rightarrow 3\sum_{k=1}^n k^2&=n^3+3\cdot\frac{n(n+1)}{2}-n \\
-\Rightarrow \sum_{k=1}^n k^2&=\frac{1}{3}(n^3-n)+\frac{n(n+1)}{2}\\
-\Rightarrow \sum_{k=1}^n k^2&=\frac{n(n+1)(2n+1)}{6}
-\end{aligned}
-$$
+1. PF:
+
+Since $$36$$ is divisible by $$4$$, any solution would also satisfy: $$x^2 \equiv 31 \equiv 3 \pmod{4}.$$
+But squares modulo $$4$$ are only $$0$$ or $$1$$, leading to a contradiction.
+
+Thus there is no integer solution.
+
+$\texttt{Q.E.D.}$.
+
+2. Sol:
+
+For the first equation, the roots mod $$31$$ are $$x\equiv 14,17$$.
+
+For the second equation, the roots mod $$37$$ are $$x\equiv 17, 20$$.
+
+Combine them via CRT:
+
+Let $$M=31\cdot 37=1147$$. Inverses:
+$$37 \equiv 6 \pmod{31},\ 37^{-1}\equiv 26 \pmod{31}$$.
+$$31 \equiv -6 \pmod{37},\ 31^{-1}\equiv 6 \pmod{37}.$$
+
+Thus $c_1 = 37 \times 26,\ c_2 = 31 \times 6$.
+
+- $$(14,17)\ \Rightarrow\ x\equiv 572 \pmod{1147},$$
+- $$(17,17)\ \Rightarrow\ x\equiv 17 \pmod{1147},$$
+- $$(14,20)\ \Rightarrow\ x\equiv 1130 \pmod{1147},$$
+- $$(17,20)\ \Rightarrow\ x\equiv 575 \pmod{1147}.$$
+
+Therefore, $$x \equiv 17,\ 572,\ 575,\ 1130 \pmod{1147}.$$
 
 ## Q.10
 
-![image-20251027024124926](./assets/image-20251027024124926.png)
+![image-20251110050013724](./assets/image-20251110050013724.png)
 
 Sol:
-$$
-\begin{aligned}
-k^4-(k-1)^4&=4k^3-6k^2+4k-1\\
-\Rightarrow\sum_{k=1}^n\big(k^4-(k-1)^4\big) &= \sum_{k=1}^n(4k^3-6k^2+4k-1) \\
-\Rightarrow n^4 &= 4\sum_{k=1}^n k^3-6\sum_{k=1}^n k^2+4\sum_{k=1}^n k-n \\
-\Rightarrow 4\sum_{k=1}^n k^3&=n^4+n(n+1)(2n+1)-2n(n+1)+n \\
-\Rightarrow \sum_{k=1}^n k^3&=\left(\frac{n(n+1)}{2}\right)^2
-\end{aligned}
-$$
+
+1. The cycles $$3,9,7,1$$ with $$T = 4$$. Since $$1000\equiv 0\pmod 4$$, the last digit is $1$.
+
+2. By Fermat’s little theorem, $$3^{30}\equiv 1\pmod{31}$$, and $$1000\equiv 10\pmod{30}$$, so $$3^{1000}\equiv 3^{10}\pmod{31}$$. And $3^{10}\equiv 25 \pmod{31}$.
+
+   Thus $${3^{1000}\equiv 25\pmod{31}}$$.
+
+3. Since $$16\cdot 2\equiv 1\pmod{31}$$, we have $$16^{-1}\equiv 2\pmod{31}$$, thus $3/16\equiv 3\cdot 16^{-1}\equiv 3\cdot 2\equiv 6\pmod{31}$.
 
 ## Q.11
 
-![image-20251027025114308](./assets/image-20251027025114308.png)
+![image-20251110051133918](./assets/image-20251110051133918.png)
 
 PF: 
 
-Let $B$ is countable, and $A \subseteq B$. Then there exists an injection $h:B\to\mathbb N$. 
+Assume $$\gcd(a,m)=1$$ and $$x,$$ $$y$$ are both inverses of $$a$$ modulo $$m$$.
 
-Then, let $i : A \hookrightarrow B$, i.e., $\forall a \in A, i(a) = a$.
+We have:
+$$
+ a(x-y) \equiv 0 \pmod m .
+$$
+Hence $$m\mid a(x-y)$$. Since $$\gcd(a,m)=1$$, we have $$m\mid(x-y)$$, i.e. $x \equiv y \pmod m$.
 
-Thus there exists an composed injection $h \circ i : A \to \mathbb N$, which means $A$ is also countable.
+Thus the inverse of $$a$$ modulo $$m$$ is unique modulo $$m$$.
 
 $\texttt{Q.E.D.}$.
 
 ## Q.12
 
-![image-20251027025150855](./assets/image-20251027025150855.png)
+![image-20251110052450998](./assets/image-20251110052450998.png)
 
 PF:
 
-We have $|A|=|B|$ and $|B|=|C|$, then there exists bijections $f:A\to B$ and $g:B\to C$.
-Thus for the composition $g\circ f:A\to C$:
-
-Injectivity: If $(g\circ f)(a_1)=(g\circ f)(a_2)$, then by injectivity of $g$ we have $f(a_1)=f(a_2)$, and by injectivity of $f$ we get $a_1=a_2$.
-
-Surjectivity: For any $c\in C$, we have $b\in B$ s.t. $g(b)=c$ by the surjectivity of $g$, then we have $a\in A$ s.t. $f(a)=b$ for the surjectivity of $f$. Therefore $(g\circ f)(a)=c$.
-
-Hence $g\circ f$ is a bijection $A\to C$, i.e., $|A|=|C|$.
+If $$\gcd(u,v)=1$$ and $$u\mid(a-b)$$, $$v\mid(a-b)$$, then obviously $$uv\mid(a-b)$$.
+Thus for every $m_i$, they all s.t. $m_i \mid (a - b)$, and all the $m_i$ are relatively prime, thus their product $m$ also satisfy $m \mid (a - b)$, i.e., $a \equiv b \pmod{m}$.
 
 $\texttt{Q.E.D.}$.
 
 ## Q.13
 
-![image-20251027025901597](./assets/image-20251027025901597.png)
+![image-20251110052624573](./assets/image-20251110052624573.png)
 
-Sol: It **must be uncountable**.
+Sol: 
 
-Assuming that $A-B$ is countable. $A - B = A \cap \overline{B}$, then $A = (A\cap \overline{B})\cup(A\cap B) = (A-B)\cup(A\cap B)$.
+With the coprime-factor rule, we  have:
+$$
+\begin{aligned}
+ x\equiv 5 \pmod 6 &\Rightarrow x\equiv 1 \pmod 2\ ,\ x\equiv 2 \pmod 3\\
+ x\equiv 3 \pmod{10} &\Rightarrow x\equiv 1 \pmod 2\ ,\ x\equiv 3 \pmod 5\\
+ x\equiv 8 \pmod{15} &\Rightarrow x\equiv 2 \pmod 3\ ,\ x\equiv 3 \pmod 5
+ \end{aligned}
+$$
+Then Implement CRT:
 
-For $A\cap B\subseteq B$ and $B$ is countable, $A\cap B$ is countable. And for the union of two countable sets is countable, $A$ is also countable, which leads to a contradiction.
+$M = 30$.
 
-Therefore, $A-B$ is uncountable.
+$M_1=15, M_2=10, M_3=6$.
+
+$M_1^{-1} = 1, M_2^{-1} = 1, M_3^{-1} = 1$.
+
+Eventually, we have $x\equiv 23 \pmod{30}$.
+
+Tips: Implementing exCRT can also solve this problem.
 
 ## Q.14
 
-![image-20251027030638948](./assets/image-20251027030638948.png)
+![image-20251110053050815](./assets/image-20251110053050815.png)
 
-Schröder-Bernstein: If there is an injection $A\to B$ and an injection $B\to A$, then there exists a bijection $A\leftrightarrow B$.
+![image-20251110053059020](./assets/image-20251110053059020.png)
 
-Injections:
-- $i:(0,1)\to[0,1]$, $i(x)=x$ (injection).
-- $j:[0,1]\to(0,1)$, w.l.o.g., $j(x)=\frac{x+1}{3}$, for $j$ is strictly increasing, it's obviously an injection.
+Sol:
 
-By Schröder-Bernstein, there exists a bijection $(0,1)\leftrightarrow[0,1]$, therefore $|(0,1)|=|[0,1]|$.
+From $$x_2\equiv ax_1+c \pmod{11}$$ and $$x_3\equiv ax_2+c \pmod{11}$$, subtract :
+$$
+x_3-x_2 \equiv a(x_2-x_1) \pmod{11}
+$$
+We have: $x_3-x_2=2, x_2-x_1=-3\equiv 8$, and $8^{-1}\equiv 7$.
+
+Then,
+$$
+a \equiv 2\cdot 8^{-1} \equiv 2\cdot 7 \equiv 14 \equiv 3 \pmod{11}
+$$
+Thus, 
+$$
+c \equiv x_2-ax_1 \equiv 4-3\cdot 7 \equiv 4-21 \equiv -17 \equiv 5 \pmod{11}.
+$$
+Then,  $x_4 \equiv 3\cdot 6+5 \equiv 23 \equiv 1 \pmod{11}$.
 
 ## Q.15
 
-![image-20251027031116258](./assets/image-20251027031116258.png)
+![image-20251110054450340](./assets/image-20251110054450340.png)
 
-Sol: **No**.
+Sol: 
 
-Counterexample: Let $g(x)=f_1(x)=f_2(x)=x$. Then obviously $f_1,f_2 \in \Theta(g)$ but $(f_1-f_2)(x)\equiv 0$. 
-Assuming that $0\in\Theta(g)$, then there exist $c_1, c_2>0$ and $N$ s.t. $c_1\cdot g(x) \le 0 \le c_2 \cdot g(x)$ for all $x\ge N$, which is obviously impossible, which leads to a contradiction.
-Thus $(f_1-f_2)\notin\Theta(g)$.
+**Q15**
+
+1. 
+
+Since $5^{6} \equiv 1 \pmod{7}$:
+$$
+\begin{aligned}
+5^{2003}&\equiv 5^{\,5}\equiv 3\pmod 7\\
+\end{aligned}
+$$
+
+Since $5^{10} \equiv 1 \pmod{11}$:
+$$
+\begin{aligned}
+5^{2003}&\equiv 5^{\,3}\equiv 4\pmod {11}\\
+\end{aligned}
+$$
+Since $5^{12} \equiv 1 \pmod{13}$:
+$$
+\begin{aligned}
+5^{2003}&\equiv 5^{\,11}\equiv 8\pmod {13}\\
+\end{aligned}
+$$
+
+2. Implement CRT to modulus $$1001=7\cdot 11\cdot 13$$:
+
+Let $$M=1001,\ M_1=143,\ M_2=91,\ M_3=77.$$
+Inverses
+$$
+\begin{aligned}
+M_1&\equiv 3\pmod 7\Rightarrow M_1^{-1}\equiv 5\pmod 7\\
+M_2&\equiv 3\pmod{11}\Rightarrow M_2^{-1}\equiv 4\pmod{11}\\
+M_3&\equiv -1\pmod{13}\Rightarrow M_3^{-1}\equiv 12\pmod{13}
+\end{aligned}
+$$
+Set $$c_1=143\cdot 5=715,\ c_2=91\cdot 4=364,\ c_3=77\cdot 12=924.$$
+
+Then
+$$
+\begin{aligned}
+x
+\equiv 3\cdot 715+4\cdot 364+8\cdot 924=10993\equiv 983\pmod{1001}
+\end{aligned}
+$$
+
+Therefore, $${5^{2003}\equiv 983\pmod{1001}}$$.
 
 ## Q.16
 
-![image-20251027031458852](./assets/image-20251027031458852.png)
+![image-20251110060302027](./assets/image-20251110060302027.png)
 
 PF:
 
-For $x\ge 1$, via triangle inequality: $|f(x)|\le (|a_n|+\cdots+|a_0|)\,x^n$. Thus let $c_2=|a_n|+\cdots+|a_0|$, we have $f(x)= O(x^n)$.
+1. Factor $$561=3\cdot 11\cdot 17$$. Via Fermat’s little theorem:
 
-Plus, let $\alpha=|a_n|$ and $M=|a_{n-1}|+\cdots+|a_0|$. For $x\ge 1$, $|a_{n-1}x^{n-1}+\cdots+a_0|\le Mx^{n-1}$, thus, $|f(x)|\ge \alpha x^n-Mx^{n-1}=x^{n-1}(\alpha x-M)$.
-Let $N=\max\{1,\lceil 2M/\alpha\rceil\}$. For $x\ge N$, $\alpha x-M\ge \tfrac{\alpha}{2}x$, so $|f(x)|\ge (\alpha/2)x^n$. Then let $c_1=\alpha/2$, we have $f(x) = \Omega(x^n)$.
+$$
+\begin{aligned}
+2^{560}&=(2^{2})^{280}\equiv 1 \pmod 3\\
+2^{560}&=(2^{10})^{56}\equiv 1 \pmod{11}\\
+2^{560}&=(2^{16})^{35}\equiv 1 \pmod{17}
+\end{aligned}
+$$
+By CRT, $$2^{560}\equiv 1 \pmod{561}$$. Hence $$561$$ passes the test.
 
-Therefore, $f(x)=\Theta(x^n)$.
-
-$\texttt{Q.E.D.}$.
-
-
-
-ExtraPF:
-
-Via Limit Test:
-
-We have $\lim_{x\to\infty}\frac{|f(x)|}{x^n}=|a_n|\in(0,\infty)$. 
-By the definition of limit, w.l.o.g., take $\varepsilon=|a_n|/2$, there exist $c_1,c_2>0$ and $N$ such that $c_1x^n\le |f(x)|\le c_2x^n$ for all $x\ge N$. Hence $f(x)=\Theta(x^n)$.
-
-$\texttt{Q.E.D.}$.
+2. No. For $$561$$ is composite: $$561=3\cdot 11\cdot 17$$. 
 
 ## Q.17
 
-![image-20251027032252045](./assets/image-20251027032252045.png)
+![image-20251110061315718](./assets/image-20251110061315718.png)
 
-We have $n!\le n^n$, then $\log n!\le n\log n$.
-Obviously we have $n!\ge (n/2)^{n/2}$, then $\log n!\ge \dfrac{n}{2}\log(\dfrac{n}{2}) = \dfrac{1}{2 \log 2}n \log n$.
-Thus $\log n!=\Theta(n\log n)$.
+PF:
 
+We know $$n=pq$$ and $$\varphi(n)=(p-1)(q-1)=n-(p+q)+1$$. 
+Hence:
+$$
+s \,=\, p+q \,=\, n-\varphi(n)+1 .
+$$
+Then $$p$$ and $$q$$ solve
+$$
+X^{2}-sX+n=0 .
+$$
+$$
+D \,=\, s^{2}-4n \,=\, (p+q)^{2}-4pq \,=\, (p-q)^{2}.
+$$
+Let $$r=\sqrt{D}$$:
+$$
+p=\frac{s+r}{2}\;\ \text{and}\;\ q=\frac{s-r}{2}.
+$$
 $\texttt{Q.E.D.}$.
 
 ## Q.18
 
-![image-20251027033630022](./assets/image-20251027033630022.png)
+![image-20251110062724360](./assets/image-20251110062724360.png)
 
-![image-20251027033641401](./assets/image-20251027033641401.png)
+1. Encryption of $$M=8$$
 
-1. PF:
+$$
+\widehat{M}\equiv M^{\,e}\pmod n\,,\quad \widehat{M}\equiv 8^{\,7}\pmod{65}
+$$
+Since $$8^{2}\equiv 64\equiv -1\pmod{65}$$
+$$
+8^{7}=8\,(8^{2})^{3}\equiv 8\,(-1)^{3}\equiv -8\equiv 57\pmod{65}
+$$
+Thus $$\widehat{M}=57$$.
 
-**Loop invariant**: After i-th iteration, count is $i$ and the current $S$ is the last $S$ with its rightmost 1-bit removed.
+2. Decryption exponent
 
-**Initialization**: At the begining, $i=0$, and the count is $0$, and it's trivially satisfied the loop invariant.
+$$
+\varphi(65)=(5-1)(13-1)=48\,,\quad 7\,d\equiv 1\pmod{48}\,,\quad d=7
+$$
 
-**Maintenance**: For $S - 1$, the rightmost 1-bit of $S$ will be removed, and all the 0-bits at the rightside of the 1-bit will become 1-bits. Then for the bitwise $AND$ operation, all the noticed bits will eventually become 0-bits. Which is to say, the rightmost 1-bit will be removed, which satisfy the loop invariant.
+3. Decrypt
 
-**Termination**: The loop will terminate when $S = 0$, i.e., there's no 1-bit in $S$, and the iterate times, which is the count, is the number of 1-bits.
-
-$\texttt{Q.E.D.}$.
-
-2. Sol:
-
-In each iteration, there will be a bitwise $AND$ operation, and the rightmost 1-bit of $S$ will be removed. Thus the number of bitwise $AND$ operations equals to the number of **1-bits** in $S$.
+$$
+\widehat{M}^{\,d}\equiv 57^{\,7}\pmod{65}\,,
+\quad 57\equiv -8\pmod{65}\,,\quad 8^{2}\equiv -1\pmod{65}\,
+$$
+$$
+57^{\,7}\equiv (-8)^{7}\equiv -\,8^{7}\equiv -57\equiv 8\pmod{65}
+$$
+Result: $$M=8$$.
 
 ## Q.19
 
-![image-20251027035357391](./assets/image-20251027035357391.png)
+![image-20251110063010476](./assets/image-20251110063010476.png)
 
-1. PF:
+Let $$n=pq$$ with primes $$p\;\ q$$. Define $$\lambda(n)=\operatorname{lcm}(p-1\;\ q-1)$$ and choose $$d'$$ with $$e\,d'\equiv 1 \pmod{\lambda(n)}$$. 
+For any message $$M$$ and ciphertext $$C\equiv M^{\,e}\pmod n$$ show $$C^{\,d'}\equiv M \pmod n$$.
 
-We have $a^{\log_b n}=n^{\log_b a}$, then $(\sqrt{2})^{\log_2 n}=n^{\log_2\sqrt{2}}=n^{1/2}=\sqrt{n}$, thus, $(\sqrt{2})^{\log n}=\Theta(\sqrt{n})$, then $(\sqrt{2})^{\log n} = O(\sqrt{n})$ is trivially true.
+Let $$e\,d'=1+k\,\lambda(n)$$. Prove modulo $$p$$ and modulo $$q$$.
 
-2. Sol:
+- If $$p\mid M$$ then $$C\equiv 0\pmod p$$ hence $$C^{\,d'}\equiv 0\equiv M\pmod p$$.  
+- If $$\gcd(M\;\ p)=1$$ then $$p-1\mid \lambda(n)$$ thus:
+  $$
+  M^{\,\lambda(n)}\equiv 1 \pmod p\\
+  M^{\,e\,d'}=M^{\,1+k\,\lambda(n)}\equiv M\cdot\big(M^{\,\lambda(n)}\big)^{k}\equiv M \pmod p.
+  $$
 
-$$
-(\log n)^2 \prec 2^{\sqrt{\log_2 n}} \prec n(\log n)^{1001} \prec n^{1.0001} \prec (1.0001)^n \prec n^n
-$$
-
-## Q.20
-
-![image-20251027041958003](./assets/image-20251027041958003.png)
-
-Sol:
-
-Let $a_k=2^{2^k}$ and blocks $B_k=[a_k,a_{k+1})\cap\mathbb N$.
-Let:
-$$
-f(n)=\begin{cases}
-n^2,& n\in B_k,\ k\ is \ \text{even}\\
-a_k n,& n\in B_k,\ k\ is \ \text{odd}
-\end{cases}\quad
-g(n)=\begin{cases}
-a_k n,& n\in B_k,\ k\ is \ \text{even}\\
-n^2,& n\in B_k,\ k\ is \ \text{odd}
-\end{cases}
-$$
-Inside any block both $n^2$ and $a_k n$ increase in $n$. 
-
-At boundaries, $f(a_{k+1}-1)<f(a_{k+1})=a_{k+1}^2$ and $g(a_{k+1}-1)<g(a_{k+1})=a_{k+1}^2$, then for $a_{k+1} \gg a_k$, $f,g$ are both increasing.
-
-On even blocks, let $n=a_{k+1}-1$, $f(n)/g(n)=n/a_k\ge (a_{k+1}-1)/a_k\to\infty$, thus $f \neq O(g)$.
-
-On odd blocks, let $n=a_{k+1}-1$, $g(n)/f(n)=n / a_k \ge (a_{k+1}-1)/a_k\to\infty$, thus $g \neq O(f)$.
-
-Which satisfy the statement.
-
-## Q.21
-
-![image-20251027042215186](./assets/image-20251027042215186.png)
-
-Sol:
-
-A. **True.** Forall NP-Complete problem $X$, there is a poly-time reduction $X\le_p \text{3SAT}$. Compose it with the $O(n^8)$ 3SAT solver to get a polynomial-time algorithm for $X$.
-
-B. **False**. The reduction may map size $n$ to $m=\text{poly}(n)$. Then the runtime becomes $O(m^8)=O(n^{8k})$ for some $k\ge1$, not necessarily $O(n^8)$.
-
-C. **True**. If an NP-Complete problem (like 3SAT) is solvable in polynomial time, then $P=NP$, thus all problems in NP are solvable in polynomial time.
-
-D. **False**. An $O(n^8)$ algorithm for 3SAT dosen't give the worst-case lower bound for other NP-Complete problems, then it might be faster.
-
-E. **True**. 3SAT is NP-Complete and has a polynomial-time algorithm, we then have $P=NP$.
-
-## Q.22
-
-![image-20251027044446482](./assets/image-20251027044446482.png)
-
-Sol:
-
-1. $f(n) = O(g(n))$.
-2. $f(n) = \Omega(g(n))$.
-3. $f(n) = \Omega(g(n))$.
-4. $f(n) = O(g(n))$.
-5. $f(n) = \Theta(g(n))$.
-6. $f(n) = O(g(n))$.
-7. $f(n) = \Omega(g(n))$.
+The same holds modulo $$q$$. Therefore $$C^{\,d'}\equiv M \pmod p$$ and $$C^{\,d'}\equiv M \pmod q$$. 
+Via CRT we conclude $$C^{\,d'}\equiv M \pmod n$$. Thus decryption using $$d'$$ works.
